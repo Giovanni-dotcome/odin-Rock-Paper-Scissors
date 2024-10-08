@@ -4,12 +4,7 @@ function getComputerChoice() {
   return choices[Math.floor(Math.random() * 3)];
 }
 
-function getHumanChoice() {
-  return (prompt('write your move: rock, scissors or paper')).toLowerCase();
-}
-
-function playRound() {
-  let humanChoice = getHumanChoice();
+function playRound(humanChoice) {
   let computerChoice = getComputerChoice();
 
   if (humanChoice === 'rock') {
@@ -51,18 +46,22 @@ function playRound() {
       console.log(`Even! paper and paper`);
   }
 }
+
 let humanScore = 0;
 let computerScore = 0;
-function playGame() {
-  for (let i = 0; i < 5; i++)
-    playRound();
 
-  if (humanScore > computerScore)
+const btnClick = (e) => {
+  console.log(e.target.innerText)
+  playRound(e.target.innerText);
+
+  if (humanScore == 5)
     console.log('you won!!!!');
-  else if (humanScore < computerScore)
+  else if (computerScore == 5)
     console.log('you lose!!!!');
-  else
-  console.log('Even!!!!');
 }
 
-playGame();
+const buttons = document.querySelectorAll('button');
+
+for (const button of buttons) {
+  button.addEventListener('click', btnClick);
+}
